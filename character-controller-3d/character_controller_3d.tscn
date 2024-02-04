@@ -1,3 +1,25 @@
-[gd_scene format=3 uid="uid://cwnd3rnn5sslm"]
+[gd_scene load_steps=4 format=3 uid="uid://cwnd3rnn5sslm"]
 
-[node name="CharacterController3D" type="CharacterBody3D"]
+[ext_resource type="Script" path="res://character-controller-3d/character_controller_3d.gd" id="1_wv2jc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_slixb"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tj7b1"]
+size = Vector3(0.4, 0.2, 0.4)
+
+[node name="CharacterController3D" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_wv2jc")
+camera = NodePath("Camera3D")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999991, 0.00358039, 0.0020712, -0.00357446, 0.99999, -0.00285975, -0.00208142, 0.00285232, 0.999994, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_slixb")
+
+[node name="FeetCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.417164, 0)
+shape = SubResource("BoxShape3D_tj7b1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.333216, 0)
