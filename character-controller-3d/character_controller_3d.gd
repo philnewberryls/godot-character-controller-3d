@@ -34,6 +34,8 @@ func _process(_delta):
 		ray_query.collide_with_areas = true
 		var raycast_result = space.intersect_ray(ray_query)
 		print(raycast_result)
+		print(raycast_result.collider.name)
+		if raycast_result.collider is Interactable3D: print("This is an interactable.")
 
 
 func _physics_process(delta):

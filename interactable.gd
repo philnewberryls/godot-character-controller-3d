@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends Area3D
 class_name Interactable3D
 
 
