@@ -1,12 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://gdtogsxeswo"]
+[gd_scene load_steps=10 format=3 uid="uid://gdtogsxeswo"]
 
 [ext_resource type="PackedScene" uid="uid://cwnd3rnn5sslm" path="res://character-controller-3d/character_controller_3d.tscn" id="1_b0brw"]
+[ext_resource type="Script" path="res://interactable.gd" id="2_dasgn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_55cm1"]
 size = Vector3(20, 0.2, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p6tx5"]
 size = Vector3(20, 0.2, 20)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h0v4h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hicet"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jn4qf"]
 
@@ -32,6 +37,18 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor"]
 shape = SubResource("BoxShape3D_p6tx5")
+
+[node name="Interactable" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.28155, 0, -4.3411)
+script = ExtResource("2_dasgn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactable"]
+mesh = SubResource("SphereMesh_h0v4h")
+
+[node name="Area3D" type="Area3D" parent="World/Interactable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactable/Area3D"]
+shape = SubResource("SphereShape3D_hicet")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yyon3")

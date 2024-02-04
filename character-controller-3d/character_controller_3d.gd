@@ -23,6 +23,19 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		var ray_length = 500
+		var mouse_pos = get_viewport().get_mouse_position()
+		var ray_query = PhysicsRayQueryParameters3D.new()
+		var space = get_world_3d().direct_space_state
+		ray_query.from = camera.project_ray_origin(mouse_pos)
+		ray_query.to = ray_query.from + camera.project_ray_normal(mouse_pos) * ray_length
+		ray_query.collide_with_areas = true
+		var raycast_result = space.intersect_ray(ray_query)
+		print(raycast_result)
+
+
 func _physics_process(delta):
 	if not is_on_floor(): velocity.y -= gravity * delta
 
